@@ -26,16 +26,23 @@ protocol SearchDataStore {
     var selectedMedia: Media? { get set }
 }
 
+protocol SearchPresentationLogic: NSObject {
+	func displayResults(medias:  [Media])
+	func displayMediaDetails(media: Media)
+	func displayLoadingIndicator()
+	func dismissLoadingIndicator()
+}
+
 class SearchInteractor: SearchBusinessLogic, SearchDataStore {
-    var presenter: SearchPresentationLogic?
+    weak var presenter: SearchPresentationLogic? = nil
     var worker: SearchWorker? = SearchWorker()
 
 
     // MARK: - Data Store
     var lastTerm = ""
     var currentPage: Int = 1
-    var currentMedias: [Media] = []
-    var selectedMedia: Media?
+    var currentMedias = [Media]()
+    var selectedMedia: Media? = nil
 
     // MARK: - Business logic
 

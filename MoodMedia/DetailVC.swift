@@ -20,11 +20,6 @@ protocol DetailsDisplayLogic: class {
 	func routeToMediaPlayer(media: Media)
 }
 
-protocol DetailsPresentationLogic {
-	func presentAlbumDetails(response: [Media])
-	func presentAlbumDetailsErrorMessage()
-	func presentMediaPlayer(response: Media)
-}
 
 class DetailVC: UIViewController, DetailsDisplayLogic, DetailsPresentationLogic {
 
@@ -37,7 +32,7 @@ class DetailVC: UIViewController, DetailsDisplayLogic, DetailsPresentationLogic 
 		let m_artistLbl = UILabel(frame: .zero)
 		let m_albumLbl = UILabel(frame: .zero)
 		
-		var album: Album?
+		var album: Album? = nil
 		var tracks: [Media] = []
 		
 		// MARK: Object lifecycle
@@ -101,6 +96,8 @@ class DetailVC: UIViewController, DetailsDisplayLogic, DetailsPresentationLogic 
 			let media = dataStore.media {
 				interactor?.fetchAlbumDetails(request: media)
 			}
+			
+			m_tableView.tableHeaderView = headView
 		}
 		
 		// MARK: Use cases

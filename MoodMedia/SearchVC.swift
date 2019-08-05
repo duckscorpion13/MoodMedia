@@ -21,13 +21,6 @@
 import UIKit
 import SDWebImage
 
-protocol SearchPresentationLogic {
-	func displayResults(medias:  [Media])
-	func displayMediaDetails(media: Media)
-	func displayLoadingIndicator()
-	func dismissLoadingIndicator()
-}
-
 class SearchVC: UIViewController, SearchPresentationLogic {
 	let contentCellIdentifier = "SearchTableViewCell"
 	
@@ -38,7 +31,7 @@ class SearchVC: UIViewController, SearchPresentationLogic {
 	let m_tableView = UITableView(frame: .zero)
 	private weak var noResultsLabel: UILabel?
 	
-	let searchController = UISearchController(searchResultsController: nil)
+	let m_searchCtl = UISearchController(searchResultsController: nil)
 	weak var activityIndicator: UIActivityIndicatorView?
 	
 	// MARK: Object lifecycle
@@ -114,7 +107,7 @@ class SearchVC: UIViewController, SearchPresentationLogic {
 		indicator.clipsToBounds = true
 		indicator.layer.cornerRadius = 8.0
 		
-		searchController.searchBar.isUserInteractionEnabled = false
+		m_searchCtl.searchBar.isUserInteractionEnabled = false
 		view.isUserInteractionEnabled = false
 		
 		view.addSubview(indicator)
@@ -134,7 +127,7 @@ class SearchVC: UIViewController, SearchPresentationLogic {
 		activityIndicator?.stopAnimating()
 		activityIndicator?.removeFromSuperview()
 		
-		searchController.searchBar.isUserInteractionEnabled = true
+		m_searchCtl.searchBar.isUserInteractionEnabled = true
 		view.isUserInteractionEnabled = true
 	}
 	
@@ -198,18 +191,18 @@ extension SearchVC {
 //		let appearance = UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self])
 //		appearance.setTitleTextAttributes(attributes, for: .normal)
 		
-		searchController.searchBar.placeholder = "Nombre de la canción"
+		m_searchCtl.searchBar.placeholder = "Nombre de la canción"
 //		searchController.obscuresBackgroundDuringPresentation = false
-		searchController.searchBar.barStyle = .black
-		searchController.searchBar.barTintColor = .white
-		searchController.searchBar.delegate = self
+		m_searchCtl.searchBar.barStyle = .black
+		m_searchCtl.searchBar.barTintColor = .white
+		m_searchCtl.searchBar.delegate = self
 		
 //		navigationItem.searchController = searchController
 //		navigationItem.hidesSearchBarWhenScrolling = false
 		
 		definesPresentationContext = false
 		
-		m_tableView.tableHeaderView = searchController.searchBar
+		m_tableView.tableHeaderView = m_searchCtl.searchBar
 //		navigationItem.titleView =  searchController.searchBar
 	}
 }
@@ -225,6 +218,10 @@ extension SearchVC: UISearchBarDelegate {
 		
 //		let request = Search.Request(searchTerm: term, page: 1)
 		interactor.startSearch(term: term, page: 1)
+	}
+	
+	func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+	
 	}
 	
 	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

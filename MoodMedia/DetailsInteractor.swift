@@ -22,16 +22,22 @@ protocol DetailsDataStore {
     var album: Album? { get set }
 }
 
+protocol DetailsPresentationLogic: NSObject {
+	func presentAlbumDetails(response: [Media])
+	func presentAlbumDetailsErrorMessage()
+	func presentMediaPlayer(response: Media)
+}
+
 class DetailsInteractor: DetailsBusinessLogic, DetailsDataStore {
-    var presenter: DetailsPresentationLogic?
-    var worker: DetailsWorker? = DetailsWorker()
+    weak var presenter: DetailsPresentationLogic? = nil
+    var worker = DetailsWorker()
     var media: Media?
     var album: Album?
 
     // MARK: Do something
 
     func fetchAlbumDetails(request: Media) {
-        worker?.fetchAlbumDetails(media: request, completion: { success, album in
+        worker.fetchAlbumDetails(media: request, completion: { success, album in
             self.album = album
 
             if success {

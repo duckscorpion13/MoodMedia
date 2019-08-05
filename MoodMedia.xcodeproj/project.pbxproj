@@ -15,6 +15,22 @@
 		F93C484422F7E2BD0090CCFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F93C484222F7E2BD0090CCFA /* LaunchScreen.storyboard */; };
 		F93C484C22F7E4090090CCFA /* WeatherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C484B22F7E4090090CCFA /* WeatherVC.swift */; };
 		F93C484E22F7E4BF0090CCFA /* current.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C484D22F7E4BF0090CCFA /* current.swift */; };
+		F93C485022F7E8790090CCFA /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C484F22F7E8790090CCFA /* AppNavigationController.swift */; };
+		F93C485222F7E8870090CCFA /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C485122F7E8870090CCFA /* SearchVC.swift */; };
+		F93C485722F7E8F30090CCFA /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C485422F7E8F30090CCFA /* Album.swift */; };
+		F93C485822F7E8F30090CCFA /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C485522F7E8F30090CCFA /* Media.swift */; };
+		F93C485922F7E8F30090CCFA /* SearchNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C485622F7E8F30090CCFA /* SearchNode.swift */; };
+		F93C485D22F7EA6A0090CCFA /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C485C22F7EA6A0090CCFA /* MyTableViewCell.swift */; };
+		F93C486222F7EAB30090CCFA /* Media+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C485F22F7EAB30090CCFA /* Media+URL.swift */; };
+		F93C486322F7EAB30090CCFA /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486022F7EAB30090CCFA /* UIView+.swift */; };
+		F93C486422F7EAB30090CCFA /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486122F7EAB30090CCFA /* URL+Extensions.swift */; };
+		F93C486622F7EDB90090CCFA /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486522F7EDB90090CCFA /* SearchInteractor.swift */; };
+		F93C486822F7EE240090CCFA /* SearchWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486722F7EE240090CCFA /* SearchWorker.swift */; };
+		F93C486A22F806420090CCFA /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486922F806420090CCFA /* SearchPresenter.swift */; };
+		F93C486C22F808F90090CCFA /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486B22F808F90090CCFA /* ApiClient.swift */; };
+		F93C486E22F810000090CCFA /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486D22F810000090CCFA /* DetailVC.swift */; };
+		F93C487022F812570090CCFA /* DetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486F22F812570090CCFA /* DetailsInteractor.swift */; };
+		F93C487222F8132C0090CCFA /* DetailsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C487122F8132B0090CCFA /* DetailsWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +46,22 @@
 		F93C484522F7E2BD0090CCFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F93C484B22F7E4090090CCFA /* WeatherVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherVC.swift; sourceTree = "<group>"; };
 		F93C484D22F7E4BF0090CCFA /* current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = current.swift; sourceTree = "<group>"; };
+		F93C484F22F7E8790090CCFA /* AppNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
+		F93C485122F7E8870090CCFA /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		F93C485422F7E8F30090CCFA /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		F93C485522F7E8F30090CCFA /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		F93C485622F7E8F30090CCFA /* SearchNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNode.swift; sourceTree = "<group>"; };
+		F93C485C22F7EA6A0090CCFA /* MyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
+		F93C485F22F7EAB30090CCFA /* Media+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Media+URL.swift"; sourceTree = "<group>"; };
+		F93C486022F7EAB30090CCFA /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		F93C486122F7EAB30090CCFA /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		F93C486522F7EDB90090CCFA /* SearchInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
+		F93C486722F7EE240090CCFA /* SearchWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchWorker.swift; sourceTree = "<group>"; };
+		F93C486922F806420090CCFA /* SearchPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
+		F93C486B22F808F90090CCFA /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		F93C486D22F810000090CCFA /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		F93C486F22F812570090CCFA /* DetailsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
+		F93C487122F8132B0090CCFA /* DetailsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,16 +114,48 @@
 		F93C483822F7E2BB0090CCFA /* MoodMedia */ = {
 			isa = PBXGroup;
 			children = (
+				F93C486B22F808F90090CCFA /* ApiClient.swift */,
+				F93C485E22F7EAB30090CCFA /* Helpers */,
+				F93C485322F7E8F30090CCFA /* Models */,
 				F93C483922F7E2BB0090CCFA /* AppDelegate.swift */,
+				F93C486922F806420090CCFA /* SearchPresenter.swift */,
+				F93C486522F7EDB90090CCFA /* SearchInteractor.swift */,
+				F93C486722F7EE240090CCFA /* SearchWorker.swift */,
+				F93C485C22F7EA6A0090CCFA /* MyTableViewCell.swift */,
+				F93C487122F8132B0090CCFA /* DetailsWorker.swift */,
+				F93C486D22F810000090CCFA /* DetailVC.swift */,
 				F93C484D22F7E4BF0090CCFA /* current.swift */,
 				F93C484B22F7E4090090CCFA /* WeatherVC.swift */,
+				F93C486F22F812570090CCFA /* DetailsInteractor.swift */,
 				F93C483B22F7E2BB0090CCFA /* ViewController.swift */,
 				F93C483D22F7E2BB0090CCFA /* Main.storyboard */,
 				F93C484022F7E2BD0090CCFA /* Assets.xcassets */,
 				F93C484222F7E2BD0090CCFA /* LaunchScreen.storyboard */,
+				F93C484F22F7E8790090CCFA /* AppNavigationController.swift */,
+				F93C485122F7E8870090CCFA /* SearchVC.swift */,
 				F93C484522F7E2BD0090CCFA /* Info.plist */,
 			);
 			path = MoodMedia;
+			sourceTree = "<group>";
+		};
+		F93C485322F7E8F30090CCFA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F93C485422F7E8F30090CCFA /* Album.swift */,
+				F93C485522F7E8F30090CCFA /* Media.swift */,
+				F93C485622F7E8F30090CCFA /* SearchNode.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F93C485E22F7EAB30090CCFA /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F93C485F22F7EAB30090CCFA /* Media+URL.swift */,
+				F93C486022F7EAB30090CCFA /* UIView+.swift */,
+				F93C486122F7EAB30090CCFA /* URL+Extensions.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,10 +273,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F93C486322F7EAB30090CCFA /* UIView+.swift in Sources */,
+				F93C485222F7E8870090CCFA /* SearchVC.swift in Sources */,
 				F93C483C22F7E2BB0090CCFA /* ViewController.swift in Sources */,
+				F93C486222F7EAB30090CCFA /* Media+URL.swift in Sources */,
+				F93C486C22F808F90090CCFA /* ApiClient.swift in Sources */,
+				F93C486E22F810000090CCFA /* DetailVC.swift in Sources */,
+				F93C487022F812570090CCFA /* DetailsInteractor.swift in Sources */,
+				F93C486422F7EAB30090CCFA /* URL+Extensions.swift in Sources */,
 				F93C484C22F7E4090090CCFA /* WeatherVC.swift in Sources */,
+				F93C486622F7EDB90090CCFA /* SearchInteractor.swift in Sources */,
+				F93C485D22F7EA6A0090CCFA /* MyTableViewCell.swift in Sources */,
+				F93C485922F7E8F30090CCFA /* SearchNode.swift in Sources */,
 				F93C483A22F7E2BB0090CCFA /* AppDelegate.swift in Sources */,
 				F93C484E22F7E4BF0090CCFA /* current.swift in Sources */,
+				F93C487222F8132C0090CCFA /* DetailsWorker.swift in Sources */,
+				F93C486822F7EE240090CCFA /* SearchWorker.swift in Sources */,
+				F93C485722F7E8F30090CCFA /* Album.swift in Sources */,
+				F93C485822F7E8F30090CCFA /* Media.swift in Sources */,
+				F93C486A22F806420090CCFA /* SearchPresenter.swift in Sources */,
+				F93C485022F7E8790090CCFA /* AppNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

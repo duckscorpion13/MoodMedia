@@ -32,16 +32,12 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
   
 
     
-	
+	var m_emitterLayer = CAEmitterLayer()
 
-	override func viewDidLoad() {
+	fileprivate func snow() {
+		//Save for later, put in own function to switch between right now its showing snow
 		
-		super.viewDidLoad()
-		
-		 //Save for later, put in own function to switch between right now its showing snow
-		let emitterLayer = CAEmitterLayer()
-		
-		emitterLayer.emitterPosition = CGPoint(x: -5, y: 20)
+		self.m_emitterLayer.emitterPosition = CGPoint(x: -5, y: 20)
 		
 		let cell = CAEmitterCell()
 		cell.birthRate = 5
@@ -49,19 +45,189 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 		cell.velocity = 50
 		cell.scale = 0.05
 		
-		cell.emissionRange = CGFloat.pi * 2.0
-		cell.contents = UIImage(named: "raindrop.png")!.cgImage
+		cell.emissionRange = CGFloat.pi * 2
+		cell.contents = UIImage(named: "raindrop.png")?.cgImage
 		
-		emitterLayer.emitterCells = [cell]
+		self.m_emitterLayer.emitterCells = [cell]
 		
-		view.layer.addSublayer(emitterLayer)
-		registerMessage()
+		view.layer.addSublayer(self.m_emitterLayer)
+	}
+	
+	override func viewDidLoad() {
+		
+		super.viewDidLoad()
 		
 		initLocation()
 		
+		sunThorn()
+//
+//		addFirework()
+//
+//		snow()
 	}
+	private func flameCell(scale: CGFloat = 0.25) -> CAEmitterCell {
+		let cell = CAEmitterCell()
+		
+		cell.color = UIColor(red: 1, green: 0.5, blue: 0.2, alpha: 1.0).cgColor
+		cell.contents = UIImage(named: "raindrop")?.cgImage
+		cell.scale = scale
+		
+		cell.lifetime = 5.0
+		cell.birthRate = 150
+		cell.alphaSpeed = -0.4
+		cell.velocity = 50
+		cell.velocityRange = 50
+		cell.emissionRange = CGFloat.pi * 2
+		
+		return cell
+	}
+	
+	func sunThorn() {
+		
+		self.m_emitterLayer.emitterPosition = CGPoint(x: self.view.bounds.size.width / 2, y: self.view.bounds.size.height / 2)
+		self.m_emitterLayer.emitterShape = .circle
+		self.m_emitterLayer.emitterMode = .outline
+		self.m_emitterLayer.emitterSize = CGSize(width: 100, height: 100)
+		self.m_emitterLayer.renderMode = .oldestLast
+		
+		let cell = CAEmitterCell()
+		cell.contents = UIImage(named: "RainParticle")?.cgImage
+		cell.scale = 0.25
+		cell.alphaRange = 0.2
+		cell.alphaSpeed = -0.8
+		cell.birthRate = 1000
+		cell.lifetime = 1
+		cell.velocity = 150
+		cell.velocityRange = 10
+		cell.color = UIColor.orange.cgColor
+		
+		self.m_emitterLayer.emitterCells = [cell]
+		self.view.layer.addSublayer(self.m_emitterLayer)
+	}
+	
+	private func trailCell() -> CAEmitterCell {
+		let cell = CAEmitterCell()
+		
+		cell.contents = UIImage(named: "raindrop")?.cgImage
+		cell.lifetime = 0.5
+		cell.birthRate = 45
+		cell.velocity = 80
+		cell.scale = 0.1
+		cell.alphaSpeed = -0.7
+		cell.scaleSpeed = -0.1
+		cell.scaleRange = 0.1
+		cell.beginTime = 0.01
+		cell.duration = 1.7
+		cell.emissionRange = CGFloat.pi / 8
+		cell.emissionLongitude = CGFloat.pi * 2
+		cell.yAcceleration = -350
+		
+		return cell
+	}
+	
+	private func flakeCell(_ img: String, scale: CGFloat, birthRate: Float) -> CAEmitterCell {
+		let cell = CAEmitterCell()
+		
+		cell.color = UIColor.white.cgColor
+		cell.contents = UIImage(named: img)?.cgImage
+		cell.lifetime = 5.5
+		
+		cell.birthRate = birthRate
+		
+		cell.blueRange = 0.15
+		cell.alphaRange = 0.4
+		cell.velocity = 10
+		cell.velocityRange = 300
+		cell.scale = scale
+		cell.scaleRange = scale / 2
+		cell.emissionRange = CGFloat.pi / 2
+		cell.emissionLongitude = CGFloat.pi
+		cell.yAcceleration = 50
+		cell.scaleSpeed =  -scale * 0.2
+		
+		cell.alphaSpeed = -0.1
+		cell.spin = CGFloat(Double.pi/2)
+		cell.spinRange = CGFloat(Double.pi/2 / 2)
+		return cell
+	}
+	
+	func addFirework() {
+		//""煙火"" 產生CAEmitterLayer()跟CAEmitterCell()的元件
+		
+		let firstEmitterCell = CAEmitterCell()
+		let trailCell = CAEmitterCell()
+		let fireworkCell = CAEmitterCell()
+		
+		self.m_emitterLayer.emitterSize = CGSize(width: view.bounds.width, height: view.bounds.height)
+		//發射起點
+		self.m_emitterLayer.emitterPosition = CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 1.5)
+		//加渲染效果
+		self.m_emitterLayer.renderMode = .additive
+		
+		firstEmitterCell.color = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5).cgColor
+		firstEmitterCell.redRange = 0.9
+		firstEmitterCell.greenRange = 0.9
+		firstEmitterCell.blueRange = 0.9
+		firstEmitterCell.lifetime = 2.5
+		firstEmitterCell.birthRate = 5
+		firstEmitterCell.velocity = 300
+		firstEmitterCell.velocityRange = 100
+		firstEmitterCell.emissionRange = CGFloat.pi / 4
+		firstEmitterCell.emissionLongitude = CGFloat.pi + 90
+		firstEmitterCell.yAcceleration = 100
+		
+		trailCell.contents = UIImage(named: "raindrop")?.cgImage
+		trailCell.lifetime = 1
+		trailCell.birthRate = 30
+		trailCell.velocity = 80
+		trailCell.scale = 0.1
+		trailCell.alphaSpeed = -0.7
+		trailCell.scaleSpeed = -0.1
+		trailCell.scaleRange = 0.1
+		trailCell.beginTime = 0.01
+		trailCell.duration = 1.7
+		trailCell.emissionRange = CGFloat.pi / 8
+		trailCell.emissionLongitude = CGFloat.pi * 2
+		trailCell.yAcceleration = -350
+		fireworkCell.contents = UIImage(named: "RainParticle")?.cgImage
+		fireworkCell.lifetime = 10
+		fireworkCell.birthRate = 1000
+		fireworkCell.velocity = 130
+		fireworkCell.scale = 0.2
+		fireworkCell.spin = 2
+		fireworkCell.alphaSpeed = -0.2
+		fireworkCell.scaleSpeed = -0.1
+		fireworkCell.beginTime = 1.5
+		fireworkCell.duration = 0.1
+		fireworkCell.emissionRange = CGFloat.pi * 2
+		fireworkCell.yAcceleration = -80
+		//firstEmitterCell是trailCell和fireworksCell的容器
+		firstEmitterCell.emitterCells = [trailCell, fireworkCell]
+		
+		self.m_emitterLayer.emitterCells = [firstEmitterCell]
+//		fireEmitterLayer.lifetime = 0
+		view.layer.addSublayer(self.m_emitterLayer)
+	}
+	
+	func addParticle(_ img: String) {
+		//""冰花"" 產生CAEmitterLayer()跟CAEmitterCell()的元件
+		let snowflakeEmitterLayer = CAEmitterLayer()
+	
+		snowflakeEmitterLayer.emitterSize = CGSize(width: view.bounds.width, height: view.bounds.height)
+		//發射起點
+		snowflakeEmitterLayer.emitterPosition = CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 2)
+		//粒子從具有相對角的矩形發射
+		snowflakeEmitterLayer.renderMode = .additive
+		
+		let cell = flameCell()//flakeCell("snow", scale: 0.1, birthRate: 30)
 
-
+		
+		snowflakeEmitterLayer.emitterShape = .point
+		snowflakeEmitterLayer.emitterCells = [cell]
+		view.layer.addSublayer(snowflakeEmitterLayer)
+		
+	}
+	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		self.becomeFirstResponder()
@@ -197,7 +363,12 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 						self.currentSummary.text = "\(todaySummary)"
 					}
 					
-					self.iconView.image = UIImage(named: current.icon ?? "")
+					if let icon = current.icon {
+						self.iconView.image = UIImage(named: icon)
+					}
+//					self.view.layer.removeAllAnimations()
+//					self.view.layer.sublayers?.filter({ $0.isKind(of: CAEmitterLayer.self)}).first?.removeFromSuperlayer()
+//					self.addParticle("snow")//current.icon ?? "")
 					
 					let timeInSeconds = TimeInterval(current.time ?? 0)
 					let weatherDate = Date(timeIntervalSince1970: timeInSeconds)
@@ -205,10 +376,14 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 					let dateFormatter = DateFormatter()
 				
 					dateFormatter.timeStyle = .full
-					dateFormatter.dateFormat = "EEEE"
+					dateFormatter.dateFormat = "M/d EE HH:mm"
 					
 					let dayString = dateFormatter.string(from: weatherDate)
 					self.currentTimeLabel.text = dayString
+					
+					let hour = Calendar.current.component(.hour, from: weatherDate)
+					self.view.backgroundColor = hour>17 ? .blue : .skyblue
+	
 				}
         	}
 		}
@@ -216,37 +391,9 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
      
     }
 
+	
     
-    //end function
-    
-    
-    func registerMessage() {
-        
-		if #available(iOS 10.0, *) {
-			let center = UNUserNotificationCenter.current()
-			center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-				// Enable or disable features based on authorization.
-				
-				if granted {
-					print("Granted")
-				}else {
-					print("No")
-				}
-				
-			}
-		} else {
-			// Fallback on earlier versions
-		}
-		
-    }
-    
-    func scheduleMessage() {
-        
-    }
-    
-    //Change Background Image depending on temp
-    //
-    //Add Things to Do according to temp
+
 }
 
 

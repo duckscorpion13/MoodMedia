@@ -78,28 +78,21 @@ struct Current {
     var uvindex: Int?
     var todaySummary: String?
 
-
-   
-    
     init(weatherDictionary: NSDictionary){
 			
         let currentWeather: NSDictionary = weatherDictionary["currently"] as! NSDictionary
 		_ = weatherDictionary["daily"] as! NSDictionary
 		
-        
         temperature = currentWeather["temperature"] as? Float
         ozone = currentWeather["ozone"] as? Float
         uvindex = currentWeather["uvIndex"] as? Int
         todaySummary = currentWeather["summary"] as? String
-       
-    
-        
+		
         //icon = currentWeather["icon"] as String
         let currentTimeIntValue = currentWeather["time"] as! Int
         currentTime = dateStringFromUnixTime(unixTime: currentTimeIntValue)
         let iconString = currentWeather["icon"] as! String
         icon = weatherIconFromString(stringIcon: iconString)
-   
     }
 	
 	func dateStringFromUnixTime(unixTime: Int) -> String{
@@ -110,28 +103,19 @@ struct Current {
 		dateFormatter.timeStyle = .short
 
 		return dateFormatter.string(from: weatherDate)
-        
-        
-	
 	}
     func dayStringFromUnixTime(unixTime: Int) -> String{
         
         let timeInSeconds = TimeInterval(unixTime)
         let weatherDate = Date(timeIntervalSince1970: timeInSeconds)
-        
-        
+		
         let format = DateFormatter()
-        
-        
+		
         format.timeStyle = .full
         format.dateFormat = "EEEE"
 		
         return format.string(from: weatherDate)
-        
-        
-        
     }
-    
     
 	
 	//this is setting the icon from the weather pulled from the dictionary

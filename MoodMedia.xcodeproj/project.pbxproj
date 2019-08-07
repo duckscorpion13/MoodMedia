@@ -30,6 +30,7 @@
 		F93C486E22F810000090CCFA /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486D22F810000090CCFA /* DetailVC.swift */; };
 		F93C487022F812570090CCFA /* DetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486F22F812570090CCFA /* DetailsInteractor.swift */; };
 		F93C487222F8132C0090CCFA /* DetailsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C487122F8132B0090CCFA /* DetailsWorker.swift */; };
+		F9F5A44322FAD27700998EE4 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F5A44222FAD27700998EE4 /* UIColor+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		F93C486D22F810000090CCFA /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		F93C486F22F812570090CCFA /* DetailsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
 		F93C487122F8132B0090CCFA /* DetailsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsWorker.swift; sourceTree = "<group>"; };
+		F9F5A44222FAD27700998EE4 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				F93C485F22F7EAB30090CCFA /* Media+URL.swift */,
+				F9F5A44222FAD27700998EE4 /* UIColor+.swift */,
 				F93C486022F7EAB30090CCFA /* UIView+.swift */,
 				F93C486122F7EAB30090CCFA /* URL+Extensions.swift */,
 			);
@@ -279,6 +282,7 @@
 				F93C487022F812570090CCFA /* DetailsInteractor.swift in Sources */,
 				F93C486422F7EAB30090CCFA /* URL+Extensions.swift in Sources */,
 				F93C484C22F7E4090090CCFA /* WeatherVC.swift in Sources */,
+				F9F5A44322FAD27700998EE4 /* UIColor+.swift in Sources */,
 				F93C486622F7EDB90090CCFA /* SearchInteractor.swift in Sources */,
 				F93C485D22F7EA6A0090CCFA /* MyTableViewCell.swift in Sources */,
 				F93C485922F7E8F30090CCFA /* SearchNode.swift in Sources */,

@@ -32,200 +32,60 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
   
 
     
-	var m_emitterLayer = CAEmitterLayer()
+	var m_emitterLayers = [CAEmitterLayer]()
 
-	fileprivate func snow() {
-		//Save for later, put in own function to switch between right now its showing snow
+	fileprivate func setupTestBtn() {
+		let btn = UIButton(frame: CGRect(x: 10, y: 10, width: 100, height: 50))
+		btn.setTitle("Test Click1", for: .normal)
+		btn.addTarget(self, action: #selector(self.clickTest1(_:)), for: .touchDown)
+	
+		self.view.addSubview(btn)
+		self.view.bringSubviewToFront(btn)
 		
-		self.m_emitterLayer.emitterPosition = CGPoint(x: -5, y: 20)
-		
-		let cell = CAEmitterCell()
-		cell.birthRate = 5
-		cell.lifetime = 10
-		cell.velocity = 50
-		cell.scale = 0.05
-		
-		cell.emissionRange = CGFloat.pi * 2
-		cell.contents = UIImage(named: "raindrop.png")?.cgImage
-		
-		self.m_emitterLayer.emitterCells = [cell]
-		
-		view.layer.addSublayer(self.m_emitterLayer)
+		btn.translatesAutoresizingMaskIntoConstraints = false
+		if #available(iOS 11.0, *) {
+			btn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+		} else {
+			btn.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+		}
+		btn.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
 	}
+	@objc func clickTest1(_ sender: UIButton) {
+		if (0 == sender.tag % 3) {
+			for layer in self.m_emitterLayers {
+				layer.removeFromSuperlayer()
+			}
+			self.m_emitterLayers.removeAll()
+		} else if (1 == sender.tag % 3){
+			self.m_emitterLayers.append(contentsOf: [emitRain(), emitSunThorn(), emitFirework()])
+		} else {
+			self.navigationController?.pushViewController(SearchVC("rain"), animated: true)
+		}
+		sender.tag += 1
+	}
+	
+	
 	
 	override func viewDidLoad() {
 		
 		super.viewDidLoad()
 		
+	
+		
+		setupTestBtn()
+		
 		initLocation()
 		
-		sunThorn()
-//
-//		addFirework()
-//
-//		snow()
-	}
-	private func flameCell(scale: CGFloat = 0.25) -> CAEmitterCell {
-		let cell = CAEmitterCell()
-		
-		cell.color = UIColor(red: 1, green: 0.5, blue: 0.2, alpha: 1.0).cgColor
-		cell.contents = UIImage(named: "raindrop")?.cgImage
-		cell.scale = scale
-		
-		cell.lifetime = 5.0
-		cell.birthRate = 150
-		cell.alphaSpeed = -0.4
-		cell.velocity = 50
-		cell.velocityRange = 50
-		cell.emissionRange = CGFloat.pi * 2
-		
-		return cell
+		self.m_emitterLayers = [emitRain(), emitFirework()]
 	}
 	
-	func sunThorn() {
-		
-		self.m_emitterLayer.emitterPosition = CGPoint(x: self.view.bounds.size.width / 2, y: self.view.bounds.size.height / 2)
-		self.m_emitterLayer.emitterShape = .circle
-		self.m_emitterLayer.emitterMode = .outline
-		self.m_emitterLayer.emitterSize = CGSize(width: 100, height: 100)
-		self.m_emitterLayer.renderMode = .oldestLast
-		
-		let cell = CAEmitterCell()
-		cell.contents = UIImage(named: "RainParticle")?.cgImage
-		cell.scale = 0.25
-		cell.alphaRange = 0.2
-		cell.alphaSpeed = -0.8
-		cell.birthRate = 1000
-		cell.lifetime = 1
-		cell.velocity = 150
-		cell.velocityRange = 10
-		cell.color = UIColor.orange.cgColor
-		
-		self.m_emitterLayer.emitterCells = [cell]
-		self.view.layer.addSublayer(self.m_emitterLayer)
+	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+		return .portrait
 	}
 	
-	private func trailCell() -> CAEmitterCell {
-		let cell = CAEmitterCell()
-		
-		cell.contents = UIImage(named: "raindrop")?.cgImage
-		cell.lifetime = 0.5
-		cell.birthRate = 45
-		cell.velocity = 80
-		cell.scale = 0.1
-		cell.alphaSpeed = -0.7
-		cell.scaleSpeed = -0.1
-		cell.scaleRange = 0.1
-		cell.beginTime = 0.01
-		cell.duration = 1.7
-		cell.emissionRange = CGFloat.pi / 8
-		cell.emissionLongitude = CGFloat.pi * 2
-		cell.yAcceleration = -350
-		
-		return cell
-	}
-	
-	private func flakeCell(_ img: String, scale: CGFloat, birthRate: Float) -> CAEmitterCell {
-		let cell = CAEmitterCell()
-		
-		cell.color = UIColor.white.cgColor
-		cell.contents = UIImage(named: img)?.cgImage
-		cell.lifetime = 5.5
-		
-		cell.birthRate = birthRate
-		
-		cell.blueRange = 0.15
-		cell.alphaRange = 0.4
-		cell.velocity = 10
-		cell.velocityRange = 300
-		cell.scale = scale
-		cell.scaleRange = scale / 2
-		cell.emissionRange = CGFloat.pi / 2
-		cell.emissionLongitude = CGFloat.pi
-		cell.yAcceleration = 50
-		cell.scaleSpeed =  -scale * 0.2
-		
-		cell.alphaSpeed = -0.1
-		cell.spin = CGFloat(Double.pi/2)
-		cell.spinRange = CGFloat(Double.pi/2 / 2)
-		return cell
-	}
-	
-	func addFirework() {
-		//""煙火"" 產生CAEmitterLayer()跟CAEmitterCell()的元件
-		
-		let firstEmitterCell = CAEmitterCell()
-		let trailCell = CAEmitterCell()
-		let fireworkCell = CAEmitterCell()
-		
-		self.m_emitterLayer.emitterSize = CGSize(width: view.bounds.width, height: view.bounds.height)
-		//發射起點
-		self.m_emitterLayer.emitterPosition = CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 1.5)
-		//加渲染效果
-		self.m_emitterLayer.renderMode = .additive
-		
-		firstEmitterCell.color = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5).cgColor
-		firstEmitterCell.redRange = 0.9
-		firstEmitterCell.greenRange = 0.9
-		firstEmitterCell.blueRange = 0.9
-		firstEmitterCell.lifetime = 2.5
-		firstEmitterCell.birthRate = 5
-		firstEmitterCell.velocity = 300
-		firstEmitterCell.velocityRange = 100
-		firstEmitterCell.emissionRange = CGFloat.pi / 4
-		firstEmitterCell.emissionLongitude = CGFloat.pi + 90
-		firstEmitterCell.yAcceleration = 100
-		
-		trailCell.contents = UIImage(named: "raindrop")?.cgImage
-		trailCell.lifetime = 1
-		trailCell.birthRate = 30
-		trailCell.velocity = 80
-		trailCell.scale = 0.1
-		trailCell.alphaSpeed = -0.7
-		trailCell.scaleSpeed = -0.1
-		trailCell.scaleRange = 0.1
-		trailCell.beginTime = 0.01
-		trailCell.duration = 1.7
-		trailCell.emissionRange = CGFloat.pi / 8
-		trailCell.emissionLongitude = CGFloat.pi * 2
-		trailCell.yAcceleration = -350
-		fireworkCell.contents = UIImage(named: "RainParticle")?.cgImage
-		fireworkCell.lifetime = 10
-		fireworkCell.birthRate = 1000
-		fireworkCell.velocity = 130
-		fireworkCell.scale = 0.2
-		fireworkCell.spin = 2
-		fireworkCell.alphaSpeed = -0.2
-		fireworkCell.scaleSpeed = -0.1
-		fireworkCell.beginTime = 1.5
-		fireworkCell.duration = 0.1
-		fireworkCell.emissionRange = CGFloat.pi * 2
-		fireworkCell.yAcceleration = -80
-		//firstEmitterCell是trailCell和fireworksCell的容器
-		firstEmitterCell.emitterCells = [trailCell, fireworkCell]
-		
-		self.m_emitterLayer.emitterCells = [firstEmitterCell]
-//		fireEmitterLayer.lifetime = 0
-		view.layer.addSublayer(self.m_emitterLayer)
-	}
-	
-	func addParticle(_ img: String) {
-		//""冰花"" 產生CAEmitterLayer()跟CAEmitterCell()的元件
-		let snowflakeEmitterLayer = CAEmitterLayer()
-	
-		snowflakeEmitterLayer.emitterSize = CGSize(width: view.bounds.width, height: view.bounds.height)
-		//發射起點
-		snowflakeEmitterLayer.emitterPosition = CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 2)
-		//粒子從具有相對角的矩形發射
-		snowflakeEmitterLayer.renderMode = .additive
-		
-		let cell = flameCell()//flakeCell("snow", scale: 0.1, birthRate: 30)
-
-		
-		snowflakeEmitterLayer.emitterShape = .point
-		snowflakeEmitterLayer.emitterCells = [cell]
-		view.layer.addSublayer(snowflakeEmitterLayer)
-		
+	override func viewWillAppear(_ animated: Bool) {
+		locationManager.startUpdatingLocation()
+		self.navigationController?.isNavigationBarHidden = true
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -246,7 +106,7 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 	func initLocation(){
 		
 		//check to see if location services is enabled
-		if CLLocationManager .locationServicesEnabled() {
+		if CLLocationManager.locationServicesEnabled() {
 			print("Location Services Enabled")
 			locationManager.delegate = self
 			locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -396,5 +256,194 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 
 }
 
-
+extension WeatherVC {
+	func flameCell(scale: CGFloat = 0.25) -> CAEmitterCell {
+		let cell = CAEmitterCell()
+		
+		cell.color = UIColor(red: 1, green: 0.5, blue: 0.2, alpha: 1.0).cgColor
+		cell.contents = UIImage(named: "spark")?.cgImage
+		cell.scale = scale
+		
+		cell.lifetime = 5.0
+		cell.birthRate = 150
+		cell.alphaSpeed = -0.4
+		cell.velocity = 50
+		cell.velocityRange = 50
+		cell.emissionRange = CGFloat.pi * 2
+		
+		return cell
+	}
+	
+	func emitSunThorn() -> CAEmitterLayer {
+		let emitterLayer = CAEmitterLayer()
+		emitterLayer.emitterPosition = CGPoint(x: self.view.bounds.size.width / 2, y: self.view.bounds.size.height / 2)
+		emitterLayer.emitterShape = .circle
+		emitterLayer.emitterMode = .outline
+		emitterLayer.emitterSize = CGSize(width: 100, height: 100)
+		emitterLayer.renderMode = .oldestLast
+		
+		let cell = CAEmitterCell()
+		cell.contents = UIImage(named: "spark")?.cgImage
+		cell.scale = 0.1
+		cell.alphaRange = 0.2
+		cell.alphaSpeed = -0.8
+		cell.birthRate = 1000
+		cell.lifetime = 1
+		cell.velocity = 150
+		cell.velocityRange = 10
+		cell.color = UIColor.orange.cgColor
+		
+		emitterLayer.emitterCells = [cell]
+		self.view.layer.addSublayer(emitterLayer)
+		
+		return emitterLayer
+	}
+	
+	private func trailCell() -> CAEmitterCell {
+		let cell = CAEmitterCell()
+		
+		cell.contents = UIImage(named: "raindrop")?.cgImage
+		cell.lifetime = 0.5
+		cell.birthRate = 45
+		cell.velocity = 80
+		cell.scale = 0.1
+		cell.alphaSpeed = -0.7
+		cell.scaleSpeed = -0.1
+		cell.scaleRange = 0.1
+		cell.beginTime = 0.01
+		cell.duration = 1.7
+		cell.emissionRange = CGFloat.pi / 8
+		cell.emissionLongitude = CGFloat.pi * 2
+		cell.yAcceleration = -350
+		
+		return cell
+	}
+	
+	private func flakeCell(_ img: String, scale: CGFloat, birthRate: Float) -> CAEmitterCell {
+		let cell = CAEmitterCell()
+		
+		cell.color = UIColor.white.cgColor
+		cell.contents = UIImage(named: img)?.cgImage
+		cell.lifetime = 5.5
+		
+		cell.birthRate = birthRate
+		
+		cell.blueRange = 0.15
+		cell.alphaRange = 0.4
+		cell.velocity = 50
+		cell.velocityRange = 300
+		cell.scale = scale
+		cell.scaleRange = scale / 2
+		//		cell.emissionRange = CGFloat.pi / 2
+		cell.emissionLongitude = CGFloat.pi
+		cell.yAcceleration = 100
+		cell.scaleSpeed =  -scale * 0.2
+		
+		cell.alphaSpeed = -0.1
+		cell.spin = CGFloat(Double.pi/2)
+		cell.spinRange = CGFloat(Double.pi/2 / 2)
+		
+		return cell
+	}
+	
+	fileprivate func emitRain() -> CAEmitterLayer {
+		//Save for later, put in own function to switch between right now its showing snow
+		
+		let emitterLayer = CAEmitterLayer()
+		emitterLayer.emitterPosition = CGPoint(x: 0, y: 0)
+		emitterLayer.emitterMode = .outline
+		emitterLayer.emitterShape = .line
+		emitterLayer.emitterSize = CGSize(width: self.view.bounds.size.width * 2, height: 0)
+		
+		let cell = CAEmitterCell()
+		cell.birthRate = 50
+		cell.lifetime = 10
+		cell.velocity = 80
+		cell.yAcceleration = 150
+		cell.scale = 0.2
+		
+		//		cell.emissionRange = CGFloat.pi * 2
+		//		cell.emissionLatitude = CGFloat.pi / 2
+		cell.emissionLongitude = CGFloat.pi
+		cell.contents = UIImage(named: "RainParticle")?.cgImage
+		
+		emitterLayer.emitterCells = [cell]
+		
+		view.layer.addSublayer(emitterLayer)
+		
+		return emitterLayer
+	}
+	
+	func fireworkCell() -> CAEmitterCell {
+		let cell = CAEmitterCell()
+		
+		cell.contents = UIImage(named: "spark")?.cgImage
+		cell.lifetime = 10
+		cell.birthRate = 1000
+		cell.velocity = 130
+		cell.scale = 0.2
+		cell.spin = 2
+		cell.alphaSpeed = -0.2
+		cell.scaleSpeed = -0.1
+		cell.beginTime = 1.5
+		cell.duration = 0.1
+		cell.emissionRange = CGFloat.pi * 2
+		cell.yAcceleration = -80
+		
+		return cell
+	}
+	func emitFirework() -> CAEmitterLayer {
+		
+		let emitterLayer = CAEmitterLayer()
+		
+		emitterLayer.emitterSize = CGSize(width: view.bounds.width, height: view.bounds.height)
+		
+		emitterLayer.emitterPosition = CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 1.5)
+		
+		emitterLayer.renderMode = .additive
+		
+		let cell = CAEmitterCell()
+		cell.color = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5).cgColor
+		cell.redRange = 0.9
+		cell.greenRange = 0.9
+		cell.blueRange = 0.9
+		cell.lifetime = 2.5
+		cell.birthRate = 5
+		cell.velocity = 300
+		cell.velocityRange = 100
+		cell.emissionRange = CGFloat.pi / 4
+		cell.emissionLongitude = CGFloat.pi * 3 / 2
+		cell.yAcceleration = 100
+		
+		cell.emitterCells = [trailCell(), fireworkCell()]
+		
+		emitterLayer.emitterCells = [cell]
+		
+		view.layer.addSublayer(emitterLayer)
+		
+		return emitterLayer
+	}
+	
+	func addParticle(_ img: String, pos: CGPoint = CGPoint(x: 0, y: 0)) -> CAEmitterLayer {
+		//""冰花"" 產生CAEmitterLayer()跟CAEmitterCell()的元件
+		let emitterLayer = CAEmitterLayer()
+		
+		emitterLayer.emitterSize = CGSize(width: view.bounds.width * 2, height: 0)
+		//發射起點
+		emitterLayer.emitterPosition = pos
+		//粒子從具有相對角的矩形發射
+		//		emitterLayer.renderMode = .additive
+		
+		emitterLayer.emitterShape = .line
+		emitterLayer.emitterMode = .outline
+		
+		let cell = flakeCell(img, scale: 0.1, birthRate: 130)
+		
+		emitterLayer.emitterCells = [cell]
+		view.layer.addSublayer(emitterLayer)
+		
+		return emitterLayer
+		
+	}
+}
 

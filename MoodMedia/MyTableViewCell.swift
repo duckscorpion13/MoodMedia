@@ -7,12 +7,9 @@
 
 import UIKit
 
-@objc protocol MyTableViewCellDelegate {
-	@objc optional func handleVote(_ uid: String)
-}
+
 
 class MyTableViewCell: UITableViewCell {
-	var delegate: MyTableViewCellDelegate? = nil
 	
 	var uid = ""
 	
@@ -39,15 +36,6 @@ class MyTableViewCell: UITableViewCell {
 		return imgv
 	}()
 	
-	lazy var voteBtn: UIButton = {()-> UIButton in
-		
-		let btn = UIButton()
-		btn.addTarget(self, action: #selector(voteClick), for: .touchUpInside)
-		btn.setTitle("Vote", for: .normal)
-		btn.setTitleColor(.blue, for: .normal)
-		btn.setTitleColor(.gray, for: .disabled)
-		return btn
-	}()
 	
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -95,14 +83,5 @@ class MyTableViewCell: UITableViewCell {
         detailLabel.bottomAnchor.constraint(equalTo: marginGuide.bottomAnchor).isActive = true
         detailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
 		detailLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
-	
-		contentView.addSubview(voteBtn)
-		voteBtn.translatesAutoresizingMaskIntoConstraints = false
-		voteBtn.widthAnchor.constraint(equalToConstant: 50).isActive = true
-		voteBtn.centerYAnchor.constraint(equalTo: marginGuide.centerYAnchor).isActive = true
-		voteBtn.trailingAnchor.constraint(equalTo: marginGuide.trailingAnchor).isActive = true
-    }
-	@objc func voteClick(_ sender: Any) {
-		self.delegate?.handleVote?(uid)
 	}
 }

@@ -75,7 +75,10 @@ class DetailVC: UIViewController, DetailsDisplayLogic, DetailsPresentationLogic 
 	
 			m_tableView.delegate = self
 			m_tableView.dataSource = self
-			m_tableView.register(MyTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+			
+//			m_tableView.register(MyTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+			m_tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+			
 			self.view.addSubview(m_tableView)
 			m_tableView.full(of: view)
 			
@@ -153,11 +156,13 @@ class DetailVC: UIViewController, DetailsDisplayLogic, DetailsPresentationLogic 
 		}
 		
 		func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-			let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MyTableViewCell
+			let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) //as! MyTableViewCell
+	
 			let item = tracks[indexPath.row]
 			
-			cell.nameLabel.text = item.trackName
-			cell.detailLabel.text = "\(item.trackNumber ?? 0)"
+			cell.textLabel?.text = "\(item.trackNumber ?? 0)  \(item.trackName ?? "")"
+//			cell.nameLabel.text = item.trackName
+//			cell.detailLabel.text = "\(item.trackNumber ?? 0)"
 			
 			return cell
 		}

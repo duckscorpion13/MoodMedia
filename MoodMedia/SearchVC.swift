@@ -28,6 +28,8 @@ class SearchVC: UIViewController, SearchPresentationLogic {
 	
 	var m_medias = [Media]()
 	
+	var m_searchStr = ""
+	
 	let m_tableView = UITableView(frame: .zero)
 	private weak var noResultsLabel: UILabel?
 	
@@ -46,7 +48,10 @@ class SearchVC: UIViewController, SearchPresentationLogic {
 	}
 	
 	// MARK: Setup
-	
+	convenience init(_ search: String) {
+		self.init()
+		self.m_searchStr = search
+	}
 
 	
 	
@@ -64,6 +69,15 @@ class SearchVC: UIViewController, SearchPresentationLogic {
 		
 
 		interactor.presenter = self
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		self.navigationController?.isNavigationBarHidden = false
+		if("" != self.m_searchStr) {
+			interactor.startSearch(term: self.m_searchStr, page: 1)
+			self.m_searchStr = ""
+		}
 	}
 	
 	func displayResults(medias: [Media]) {

@@ -27,9 +27,10 @@ class AppNavigationController: UINavigationController {
     }
 
     func setupInitialViewController() {
-//        let storyboard = UIStoryboard(name: "SearchViewController", bundle: nil)
-//        let viewController = storyboard.instantiateInitialViewController() as! SearchViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		if let vc = storyboard.instantiateViewController(withIdentifier: "WeatherVC") as? WeatherVC {
 //        setViewControllers([viewController], animated: false)
-		setViewControllers([SearchVC()], animated: true)
+			setViewControllers([vc], animated: true)
+		}
     }
 }

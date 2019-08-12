@@ -1,9 +1,9 @@
 //
 //  current.swift
-//  Flat Weather
+//  MoodMedia
 //
-//  Created by Erica Roy on 03/23/18.
-//  Copyright (c) 2018 Erica Roy. All rights reserved.
+//  Created by DerekYang on 2019/8/1.
+//  Copyright © 2019 DKY. All rights reserved.
 //
 
 import Foundation

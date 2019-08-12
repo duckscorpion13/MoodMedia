@@ -1,8 +1,9 @@
 //
 //  MyTableViewCell.swift
-//  FirebaseDB
+//  MoodMedia
 //
-//  Created by Derek 2019/5/3.
+//  Created by DerekYang on 2019/8/1.
+//  Copyright © 2019 DKY. All rights reserved.
 //
 
 import UIKit

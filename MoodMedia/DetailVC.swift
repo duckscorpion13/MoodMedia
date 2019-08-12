@@ -1,9 +1,9 @@
 //
 //  DetailVC.swift
-//  itunesapi_cs
+//  MoodMedia
 //
 //  Created by DerekYang on 2019/8/1.
-//  Copyright © 2019 Alejandro Melo Domínguez. All rights reserved.
+//  Copyright © 2019 DKY. All rights reserved.
 //
 import AVKit
 import UIKit
@@ -29,6 +29,7 @@ class DetailVC: UIViewController, DetailsDisplayLogic, DetailsPresentationLogic 
 	
 		let m_tableView = UITableView(frame: .zero)
 		let m_imageView = UIImageView(frame: .zero)
+		let m_background = UIImageView(frame: .zero)
 		let m_artistLbl = UILabel(frame: .zero)
 		let m_albumLbl = UILabel(frame: .zero)
 		
@@ -51,19 +52,12 @@ class DetailVC: UIViewController, DetailsDisplayLogic, DetailsPresentationLogic 
 		// MARK: Setup
 		
 		private func setup() {
+			
 			self.interactor = DetailsInteractor()
 			if let interactor = self.interactor {
 				interactor.presenter = self
 			}
-//			let interactor = DetailsInteractor()
-//			let presenter = DetailsPresenter()
-//			let router = DetailsRouter()
-//			self.interactor = interactor
-//			self.router = router
-//			interactor.presenter = presenter
-//			presenter.viewController = self
-//			router.viewController = self
-//			router.dataStore = interactor
+
 		}
 		
 	
@@ -73,30 +67,34 @@ class DetailVC: UIViewController, DetailsDisplayLogic, DetailsPresentationLogic 
 		override func viewDidLoad() {
 			super.viewDidLoad()
 	
+			self.view.addSubview(self.m_background)
+			self.m_background.full(of: self.view)
+			
 			m_tableView.delegate = self
 			m_tableView.dataSource = self
 			
 //			m_tableView.register(MyTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
 			m_tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
 			
+			m_tableView.alpha = 0.8
+			
 			self.view.addSubview(m_tableView)
 			m_tableView.full(of: view)
 			
 			let headView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 120))
-			headView.backgroundColor = .red
+			headView.backgroundColor = .lightGray
 			headView.addSubview(m_imageView)
 			m_imageView.anchor(top: headView.topAnchor, left: headView.leftAnchor, bottom: nil, right: nil, width: 100, height: 100, paddingTop: 8, paddingLeft: 8)
 			
 	
 			//		m_artistLbl.numberOfLines = 0
 			headView.addSubview(m_artistLbl)
-			m_artistLbl.anchor(top: m_imageView.topAnchor, left: m_imageView.rightAnchor, bottom: nil, right: headView.rightAnchor, width: nil, height: nil, paddingTop: 8, paddingLeft: 0, paddingBottom: 8, paddingRight: 8)
+			m_artistLbl.anchor(top: m_imageView.topAnchor, left: m_imageView.rightAnchor, bottom: nil, right: headView.rightAnchor, width: nil, height: nil, paddingTop: 8, paddingLeft: 10, paddingBottom: 8, paddingRight: 8)
 			m_albumLbl.numberOfLines = 3
 			headView.addSubview(m_albumLbl)
 			m_albumLbl.anchor(top: m_artistLbl.bottomAnchor, left: m_artistLbl.leftAnchor, bottom: nil, right: headView.rightAnchor, width: nil, height: nil, paddingTop: 15, paddingLeft: 0, paddingBottom: 0, paddingRight: 8)
 			
-			if let dataStore = interactor,
-			let media = dataStore.media {
+			if let media = interactor?.media {
 				interactor?.fetchAlbumDetails(request: media)
 			}
 			
@@ -114,6 +112,7 @@ class DetailVC: UIViewController, DetailsDisplayLogic, DetailsPresentationLogic 
 			
 			if let artworkUrl = viewModel.albumCoverImage {
 				m_imageView.sd_setImage(with: artworkUrl)
+				self.m_background.sd_setImage(with: artworkUrl)
 			}
 			
 			tracks = viewModel.tracks

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		92D095F4E8FAABE9C44F609E /* Pods_MoodMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38E7173BF0A358140F46615 /* Pods_MoodMedia.framework */; };
 		F93C483A22F7E2BB0090CCFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C483922F7E2BB0090CCFA /* AppDelegate.swift */; };
-		F93C483C22F7E2BB0090CCFA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C483B22F7E2BB0090CCFA /* ViewController.swift */; };
 		F93C483F22F7E2BB0090CCFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F93C483D22F7E2BB0090CCFA /* Main.storyboard */; };
 		F93C484122F7E2BD0090CCFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F93C484022F7E2BD0090CCFA /* Assets.xcassets */; };
 		F93C484422F7E2BD0090CCFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F93C484222F7E2BD0090CCFA /* LaunchScreen.storyboard */; };
@@ -21,9 +20,9 @@
 		F93C485822F7E8F30090CCFA /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C485522F7E8F30090CCFA /* Media.swift */; };
 		F93C485922F7E8F30090CCFA /* SearchNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C485622F7E8F30090CCFA /* SearchNode.swift */; };
 		F93C485D22F7EA6A0090CCFA /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C485C22F7EA6A0090CCFA /* MyTableViewCell.swift */; };
-		F93C486222F7EAB30090CCFA /* Media+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C485F22F7EAB30090CCFA /* Media+URL.swift */; };
+		F93C486222F7EAB30090CCFA /* Media+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C485F22F7EAB30090CCFA /* Media+.swift */; };
 		F93C486322F7EAB30090CCFA /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486022F7EAB30090CCFA /* UIView+.swift */; };
-		F93C486422F7EAB30090CCFA /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486122F7EAB30090CCFA /* URL+Extensions.swift */; };
+		F93C486422F7EAB30090CCFA /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486122F7EAB30090CCFA /* URL+.swift */; };
 		F93C486622F7EDB90090CCFA /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486522F7EDB90090CCFA /* SearchInteractor.swift */; };
 		F93C486822F7EE240090CCFA /* SearchWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486722F7EE240090CCFA /* SearchWorker.swift */; };
 		F93C486C22F808F90090CCFA /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486B22F808F90090CCFA /* ApiClient.swift */; };
@@ -39,7 +38,6 @@
 		D5DDEA2E6562A3E0A55463A0 /* Pods-MoodMedia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodMedia.debug.xcconfig"; path = "Target Support Files/Pods-MoodMedia/Pods-MoodMedia.debug.xcconfig"; sourceTree = "<group>"; };
 		F93C483622F7E2BB0090CCFA /* MoodMedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoodMedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F93C483922F7E2BB0090CCFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F93C483B22F7E2BB0090CCFA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F93C483E22F7E2BB0090CCFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F93C484022F7E2BD0090CCFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F93C484322F7E2BD0090CCFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -52,9 +50,9 @@
 		F93C485522F7E8F30090CCFA /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		F93C485622F7E8F30090CCFA /* SearchNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNode.swift; sourceTree = "<group>"; };
 		F93C485C22F7EA6A0090CCFA /* MyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
-		F93C485F22F7EAB30090CCFA /* Media+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Media+URL.swift"; sourceTree = "<group>"; };
+		F93C485F22F7EAB30090CCFA /* Media+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Media+.swift"; sourceTree = "<group>"; };
 		F93C486022F7EAB30090CCFA /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
-		F93C486122F7EAB30090CCFA /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		F93C486122F7EAB30090CCFA /* URL+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
 		F93C486522F7EDB90090CCFA /* SearchInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 		F93C486722F7EE240090CCFA /* SearchWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchWorker.swift; sourceTree = "<group>"; };
 		F93C486B22F808F90090CCFA /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 				F93C484D22F7E4BF0090CCFA /* current.swift */,
 				F93C484B22F7E4090090CCFA /* WeatherVC.swift */,
 				F93C486F22F812570090CCFA /* DetailsInteractor.swift */,
-				F93C483B22F7E2BB0090CCFA /* ViewController.swift */,
 				F93C483D22F7E2BB0090CCFA /* Main.storyboard */,
 				F93C484022F7E2BD0090CCFA /* Assets.xcassets */,
 				F93C484222F7E2BD0090CCFA /* LaunchScreen.storyboard */,
@@ -150,10 +147,10 @@
 		F93C485E22F7EAB30090CCFA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				F93C485F22F7EAB30090CCFA /* Media+URL.swift */,
+				F93C485F22F7EAB30090CCFA /* Media+.swift */,
 				F9F5A44222FAD27700998EE4 /* UIColor+.swift */,
 				F93C486022F7EAB30090CCFA /* UIView+.swift */,
-				F93C486122F7EAB30090CCFA /* URL+Extensions.swift */,
+				F93C486122F7EAB30090CCFA /* URL+.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -275,12 +272,11 @@
 			files = (
 				F93C486322F7EAB30090CCFA /* UIView+.swift in Sources */,
 				F93C485222F7E8870090CCFA /* SearchVC.swift in Sources */,
-				F93C483C22F7E2BB0090CCFA /* ViewController.swift in Sources */,
-				F93C486222F7EAB30090CCFA /* Media+URL.swift in Sources */,
+				F93C486222F7EAB30090CCFA /* Media+.swift in Sources */,
 				F93C486C22F808F90090CCFA /* ApiClient.swift in Sources */,
 				F93C486E22F810000090CCFA /* DetailVC.swift in Sources */,
 				F93C487022F812570090CCFA /* DetailsInteractor.swift in Sources */,
-				F93C486422F7EAB30090CCFA /* URL+Extensions.swift in Sources */,
+				F93C486422F7EAB30090CCFA /* URL+.swift in Sources */,
 				F93C484C22F7E4090090CCFA /* WeatherVC.swift in Sources */,
 				F9F5A44322FAD27700998EE4 /* UIColor+.swift in Sources */,
 				F93C486622F7EDB90090CCFA /* SearchInteractor.swift in Sources */,

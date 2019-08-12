@@ -1,9 +1,9 @@
 //
 //  SearchNode.swift
-//  itunesapi_cs
+//  MoodMedia
 //
-//  Created by Alejandro Melo Domínguez on 7/27/19.
-//  Copyright © 2019 Alejandro Melo Domínguez. All rights reserved.
+//  Created by DerekYang on 2019/8/1.
+//  Copyright © 2019 DKY. All rights reserved.
 //
 
 import Foundation

@@ -1,9 +1,9 @@
 //
-//  ViewController.swift
-//  Flat Weather
+//  WeatherVC.swift
+//  MoodMedia
 //
-//  Created by Erica Roy on 11/19/14.
-//  Copyright (c) 2014 Erica Roy. All rights reserved.
+//  Created by DerekYang on 2019/8/1.
+//  Copyright © 2019 DKY. All rights reserved.
 //
 
 import UIKit
@@ -15,40 +15,42 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 	var locationManager = CLLocationManager()
 	
     var userLocation : String!
-    var userLat : Double!
-    var userLong : Double!
+
     var localCity : String!
     @IBOutlet weak var cityLocationLabel: UILabel!
 
 	@IBOutlet weak var iconView: UIImageView!
 	@IBOutlet weak var currentTimeLabel: UILabel!
 	@IBOutlet weak var tempLabel: UILabel!
-	@IBOutlet weak var tempMax: UILabel!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    
     @IBOutlet weak var currentSummary: UILabel!
-    @IBOutlet weak var ozoneText: UILabel!
-    @IBOutlet weak var ozoneLabel: UIView!
+
   
 	var m_searchStr = ""
     
 	var m_emitterLayers = [CAEmitterLayer]()
 
 	fileprivate func setupTestBtn() {
-		let btn = UIButton(frame: CGRect(x: 10, y: 10, width: 100, height: 50))
-		btn.setTitle("Test Click1", for: .normal)
+		let btn = UIButton(frame: .zero)
+		btn.setTitle("Promote Music", for: .normal)
 		btn.addTarget(self, action: #selector(self.clickTest1(_:)), for: .touchDown)
 	
 		self.view.addSubview(btn)
 		self.view.bringSubviewToFront(btn)
 		
+		btn.backgroundColor = .orange
+		
+		btn.clipsToBounds = true
+		btn.layer.cornerRadius = 25
+		
 		btn.translatesAutoresizingMaskIntoConstraints = false
 		if #available(iOS 11.0, *) {
-			btn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+			btn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
 		} else {
-			btn.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+			btn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
 		}
-		btn.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+		btn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+		btn.widthAnchor.constraint(equalToConstant: 150).isActive = true
+		btn.heightAnchor.constraint(equalToConstant: 50).isActive = true
 	}
 	
 	@objc func clickTest1(_ sender: UIButton) {
@@ -66,7 +68,7 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 		
 		initLocation()
 		
-//		self.m_emitterLayers = [emitSnow(), emitCloud(),emitRain(), emitSunThorn(), emitFirework()]//[emitRain(), emitFirework()]
+//		self.m_emitterLayers = [emitDrizzle()]//emitSnow(), emitCloud(),emitRain(), emitSunThorn(), emitFirework()]//[emitRain(), emitFirework()]
 	}
 	
 	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -86,10 +88,7 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 	//shake it shake it to get data
 	override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
 		if(event?.subtype == UIEvent.EventSubtype.motionShake){
-			
 			initLocation()
-		   // loadingIndicator.hidden = false
-		   // loadingIndicator.startAnimating()
 		}
 	}
     
@@ -121,9 +120,6 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 		let location: CLLocation = locations[locations.count-1]
 
 		if (location.horizontalAccuracy > 0) {
-			
-			self.userLong = (location.coordinate.longitude)
-			self.userLat = (location.coordinate.latitude)
 			//remove space silly
 			self.userLocation = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
 			//print(userLocation)
@@ -217,11 +213,12 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 					if let icon = current.icon {
 						self.m_searchStr = icon
 						self.iconView.image = UIImage(named: icon)
+						
+						self.view.backgroundColor = icon.lowercased().contains("night") ? .blue : .skyblue
 					}
-//					self.view.layer.removeAllAnimations()
-//					self.view.layer.sublayers?.filter({ $0.isKind(of: CAEmitterLayer.self)}).first?.removeFromSuperlayer()
-//					self.addParticle("snow")//current.icon ?? "")
-					
+					//					let hour = Calendar.current.component(.hour, from: weatherDate)
+					//					self.view.backgroundColor = hour>17 ? .blue : .skyblue
+										
 					let timeInSeconds = TimeInterval(current.time ?? 0)
 					let weatherDate = Date(timeIntervalSince1970: timeInSeconds)
 					
@@ -233,9 +230,6 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 					let dayString = dateFormatter.string(from: weatherDate)
 					self.currentTimeLabel.text = dayString
 					
-					let hour = Calendar.current.component(.hour, from: weatherDate)
-					self.view.backgroundColor = hour>17 ? .blue : .skyblue
-	
 				}
         	}
 		}
@@ -337,6 +331,10 @@ extension WeatherVC {
 	
 	func emitSnow() -> CAEmitterLayer {
 		return addParticle("snow", birthRate: 30)
+	}
+	
+	func emitDrizzle() -> CAEmitterLayer {
+		return addParticle("raindrop", birthRate: 15)
 	}
 	
 	func emitRain() -> CAEmitterLayer {
@@ -471,15 +469,31 @@ extension WeatherVC {
 	}
 	
 	func mapEmitterLayer(_ descption: String) {
+		for layer in self.m_emitterLayers {
+			layer.removeFromSuperlayer()
+		}
+		
 		if descption.lowercased().contains("rain") {
 			let _ = self.emitRain()
-		} else if descption.lowercased().contains("clear") {
+		}
+		
+		if descption.lowercased().contains("drizzle") {
+			let _ = self.emitDrizzle()
+		}
+		
+		if descption.lowercased().contains("clear") {
 			let _ = self.emitSunThorn()
-		}  else if descption.lowercased().contains("cloud") {
+		}
+		
+		if descption.lowercased().contains("cloud") {
 			let _ = self.emitCloud()
-		} else if descption.lowercased().contains("snow") {
+		}
+		
+		if descption.lowercased().contains("snow") {
 			let _ = self.emitSnow()
-		} else {
+		}
+		
+		if descption.lowercased().contains("wind") {
 			let _ = self.emitFirework()
 		}
 	}

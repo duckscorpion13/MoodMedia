@@ -30,7 +30,7 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var ozoneText: UILabel!
     @IBOutlet weak var ozoneLabel: UIView!
   
-
+	var m_searchStr = ""
     
 	var m_emitterLayers = [CAEmitterLayer]()
 
@@ -50,17 +50,9 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 		}
 		btn.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
 	}
+	
 	@objc func clickTest1(_ sender: UIButton) {
-		if (0 == sender.tag % 3) {
-			for layer in self.m_emitterLayers {
-				layer.removeFromSuperlayer()
-			}
-			self.m_emitterLayers.removeAll()
-		} else if (1 == sender.tag % 3){
-			self.m_emitterLayers.append(contentsOf: [emitRain(), emitSunThorn(), emitFirework()])
-		} else {
-			self.navigationController?.pushViewController(SearchVC("rain"), animated: true)
-		}
+		self.navigationController?.pushViewController(SearchVC(self.m_searchStr), animated: true)
 		sender.tag += 1
 	}
 	
@@ -70,13 +62,11 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 		
 		super.viewDidLoad()
 		
-	
-		
 		setupTestBtn()
 		
 		initLocation()
 		
-		self.m_emitterLayers = [emitRain(), emitFirework()]
+//		self.m_emitterLayers = [emitSnow(), emitCloud(),emitRain(), emitSunThorn(), emitFirework()]//[emitRain(), emitFirework()]
 	}
 	
 	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -219,11 +209,13 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 						self.tempLabel.text = "\(Int(temp))ºC"
 					}
 					
-					if let todaySummary = current.summary {
-						self.currentSummary.text = "\(todaySummary)"
+					if let summary = current.summary {
+						self.currentSummary.text = "\(summary)"
+						self.mapEmitterLayer(summary)
 					}
 					
 					if let icon = current.icon {
+						self.m_searchStr = icon
 						self.iconView.image = UIImage(named: icon)
 					}
 //					self.view.layer.removeAllAnimations()
@@ -249,10 +241,7 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 		}
         task.resume()
      
-    }
-
-	
-    
+    }   
 
 }
 
@@ -346,7 +335,11 @@ extension WeatherVC {
 		return cell
 	}
 	
-	fileprivate func emitRain() -> CAEmitterLayer {
+	func emitSnow() -> CAEmitterLayer {
+		return addParticle("snow", birthRate: 30)
+	}
+	
+	func emitRain() -> CAEmitterLayer {
 		//Save for later, put in own function to switch between right now its showing snow
 		
 		let emitterLayer = CAEmitterLayer()
@@ -424,7 +417,7 @@ extension WeatherVC {
 		return emitterLayer
 	}
 	
-	func addParticle(_ img: String, pos: CGPoint = CGPoint(x: 0, y: 0)) -> CAEmitterLayer {
+	func addParticle(_ img: String, birthRate: Float, pos: CGPoint = CGPoint(x: 0, y: 0)) -> CAEmitterLayer {
 		//""冰花"" 產生CAEmitterLayer()跟CAEmitterCell()的元件
 		let emitterLayer = CAEmitterLayer()
 		
@@ -437,13 +430,58 @@ extension WeatherVC {
 		emitterLayer.emitterShape = .line
 		emitterLayer.emitterMode = .outline
 		
-		let cell = flakeCell(img, scale: 0.1, birthRate: 130)
+		let cell = flakeCell(img, scale: 0.1, birthRate: birthRate)
 		
 		emitterLayer.emitterCells = [cell]
 		view.layer.addSublayer(emitterLayer)
 		
 		return emitterLayer
 		
+	}
+	
+	func emitCloud() -> CAEmitterLayer  {
+		let emitterLayer = CAEmitterLayer()
+		
+		emitterLayer.emitterSize = CGSize(width: view.bounds.width * 2, height: 0)
+		//發射起點
+		emitterLayer.emitterPosition = CGPoint(x: 0, y: view.bounds.height / 3)
+		//粒子從具有相對角的矩形發射
+		emitterLayer.renderMode = .additive
+		
+		emitterLayer.emitterShape = .point
+		emitterLayer.emitterMode = .surface
+		
+		
+		let cell = CAEmitterCell()
+		cell.contents = UIImage(named: "cloudy")?.cgImage
+		cell.birthRate = 0.5
+		cell.alphaRange = 0.5
+		cell.lifetime = 20
+		cell.velocity = 10
+		
+		cell.xAcceleration = 5
+		cell.emissionRange = CGFloat.pi / 2
+		
+		cell.scale = 0.30
+		cell.scaleRange = 0.1
+		emitterLayer.emitterCells = [cell]
+		view.layer.addSublayer(emitterLayer)
+		
+		return emitterLayer
+	}
+	
+	func mapEmitterLayer(_ descption: String) {
+		if descption.lowercased().contains("rain") {
+			let _ = self.emitRain()
+		} else if descption.lowercased().contains("clear") {
+			let _ = self.emitSunThorn()
+		}  else if descption.lowercased().contains("cloud") {
+			let _ = self.emitCloud()
+		} else if descption.lowercased().contains("snow") {
+			let _ = self.emitSnow()
+		} else {
+			let _ = self.emitFirework()
+		}
 	}
 }
 

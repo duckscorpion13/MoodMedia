@@ -24,11 +24,27 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 	@IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var currentSummary: UILabel!
 
-  
+	
+	var m_backgroundView: GradientView? = nil
+	
 	var m_searchStr = ""
     
 	var m_emitterLayers = [CAEmitterLayer]()
 
+	func setupBackgroundView(isNight: Bool) {
+		if let bgv = self.m_backgroundView {
+			bgv.removeFromSuperview()
+		}
+		let color1 = isNight ? UIColor.blue : UIColor.lightskyblue
+		let color2 = isNight ? UIColor.black : UIColor.lavender
+		let bgv = GradientView(frame: self.view.frame, colors: [color1, color2], type: .GRADIENT_LEFTUP_TO_RIGHTDOWN)
+		self.view.addSubview(bgv)
+		bgv.full(of: self.view)
+		
+		self.view.sendSubviewToBack(bgv)
+		self.m_backgroundView = bgv
+	}
+	
 	fileprivate func setupTestBtn() {
 		let btn = UIButton(frame: .zero)
 		btn.setTitle("Promote Music", for: .normal)
@@ -214,7 +230,9 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 						self.m_searchStr = icon
 						self.iconView.image = UIImage(named: icon)
 						
-						self.view.backgroundColor = icon.lowercased().contains("night") ? .blue : .skyblue
+						let isNight = icon.lowercased().contains("night")
+						self.setupBackgroundView(isNight: isNight)
+//						self.view.backgroundColor = icon.lowercased().contains("night") ? .blue : .skyblue
 					}
 					//					let hour = Calendar.current.component(.hour, from: weatherDate)
 					//					self.view.backgroundColor = hour>17 ? .blue : .skyblue
@@ -474,27 +492,27 @@ extension WeatherVC {
 		}
 		
 		if descption.lowercased().contains("rain") {
-			let _ = self.emitRain()
+			self.m_emitterLayers.append(self.emitRain())
 		}
 		
 		if descption.lowercased().contains("drizzle") {
-			let _ = self.emitDrizzle()
+			self.m_emitterLayers.append(self.emitDrizzle())
 		}
 		
 		if descption.lowercased().contains("clear") {
-			let _ = self.emitSunThorn()
+			self.m_emitterLayers.append(self.emitSunThorn())
 		}
 		
 		if descption.lowercased().contains("cloud") {
-			let _ = self.emitCloud()
+			self.m_emitterLayers.append(self.emitCloud())
 		}
 		
 		if descption.lowercased().contains("snow") {
-			let _ = self.emitSnow()
+			self.m_emitterLayers.append(self.emitSnow())
 		}
 		
 		if descption.lowercased().contains("wind") {
-			let _ = self.emitFirework()
+			self.m_emitterLayers.append(self.emitFirework())
 		}
 	}
 }

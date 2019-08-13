@@ -29,6 +29,7 @@
 		F93C486E22F810000090CCFA /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486D22F810000090CCFA /* DetailVC.swift */; };
 		F93C487022F812570090CCFA /* DetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486F22F812570090CCFA /* DetailsInteractor.swift */; };
 		F93C487222F8132C0090CCFA /* DetailsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C487122F8132B0090CCFA /* DetailsWorker.swift */; };
+		F9799A322302963700301B07 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9799A312302963700301B07 /* Gradient.swift */; };
 		F9F5A44322FAD27700998EE4 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F5A44222FAD27700998EE4 /* UIColor+.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		F93C486D22F810000090CCFA /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		F93C486F22F812570090CCFA /* DetailsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
 		F93C487122F8132B0090CCFA /* DetailsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsWorker.swift; sourceTree = "<group>"; };
+		F9799A312302963700301B07 /* Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		F9F5A44222FAD27700998EE4 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,7 +114,6 @@
 		F93C483822F7E2BB0090CCFA /* MoodMedia */ = {
 			isa = PBXGroup;
 			children = (
-				F93C486B22F808F90090CCFA /* ApiClient.swift */,
 				F93C485E22F7EAB30090CCFA /* Helpers */,
 				F93C485322F7E8F30090CCFA /* Models */,
 				F93C483922F7E2BB0090CCFA /* AppDelegate.swift */,
@@ -147,6 +148,8 @@
 		F93C485E22F7EAB30090CCFA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				F9799A312302963700301B07 /* Gradient.swift */,
+				F93C486B22F808F90090CCFA /* ApiClient.swift */,
 				F93C485F22F7EAB30090CCFA /* Media+.swift */,
 				F9F5A44222FAD27700998EE4 /* UIColor+.swift */,
 				F93C486022F7EAB30090CCFA /* UIView+.swift */,
@@ -285,6 +288,7 @@
 				F93C483A22F7E2BB0090CCFA /* AppDelegate.swift in Sources */,
 				F93C484E22F7E4BF0090CCFA /* current.swift in Sources */,
 				F93C487222F8132C0090CCFA /* DetailsWorker.swift in Sources */,
+				F9799A322302963700301B07 /* Gradient.swift in Sources */,
 				F93C486822F7EE240090CCFA /* SearchWorker.swift in Sources */,
 				F93C485722F7E8F30090CCFA /* Album.swift in Sources */,
 				F93C485822F7E8F30090CCFA /* Media.swift in Sources */,

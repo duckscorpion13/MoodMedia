@@ -21,8 +21,16 @@ extension UIColor {
 		self.init(red: red, green: green, blue: blue, alpha: a)
 	}
 	
-	class var skyblue: UIColor {
-		return UIColor(135, 206, 235)
+	class var lightskyblue: UIColor {
+		return UIColor(0x87, 0xCE, 0xFA)
+	}
+	
+	class var lightblue: UIColor {
+		return UIColor(0xAD, 0xD8, 0xE6)
+	}
+	
+	class var lavender: UIColor {
+		return UIColor(0xE6, 0xE6, 0xFA)
 	}
 	
 }

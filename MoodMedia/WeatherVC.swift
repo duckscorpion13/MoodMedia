@@ -85,6 +85,15 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 		initLocation()
 		
 //		self.m_emitterLayers = [emitDrizzle()]//emitSnow(), emitCloud(),emitRain(), emitSunThorn(), emitFirework()]//[emitRain(), emitFirework()]
+		
+		let singleFinger = UITapGestureRecognizer(target: self, action: #selector(self.singleTap(_:)))
+		singleFinger.numberOfTapsRequired = 1
+		singleFinger.numberOfTouchesRequired = 1
+		self.view.addGestureRecognizer(singleFinger)
+	}
+	@objc func singleTap(_ recognizer: UITapGestureRecognizer) {
+		let point = recognizer.location(ofTouch: 0, in: recognizer.view)
+		let _ = self.emitFirework(point)
 	}
 	
 	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -401,13 +410,13 @@ extension WeatherVC {
 		
 		return cell
 	}
-	func emitFirework() -> CAEmitterLayer {
+	func emitFirework(_ startPoint: CGPoint) -> CAEmitterLayer {
 		
 		let emitterLayer = CAEmitterLayer()
 		
 		emitterLayer.emitterSize = CGSize(width: view.bounds.width, height: view.bounds.height)
 		
-		emitterLayer.emitterPosition = CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 1.5)
+		emitterLayer.emitterPosition = startPoint//CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 1.5)
 		
 		emitterLayer.renderMode = .additive
 		
@@ -429,6 +438,10 @@ extension WeatherVC {
 		emitterLayer.emitterCells = [cell]
 		
 		view.layer.addSublayer(emitterLayer)
+		
+		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+			emitterLayer.lifetime = 0
+		}
 		
 		return emitterLayer
 	}
@@ -511,9 +524,9 @@ extension WeatherVC {
 			self.m_emitterLayers.append(self.emitSnow())
 		}
 		
-		if descption.lowercased().contains("wind") {
-			self.m_emitterLayers.append(self.emitFirework())
-		}
+//		if descption.lowercased().contains("wind") {
+//			self.m_emitterLayers.append(self.emitFirework())
+//		}
 	}
 }
 

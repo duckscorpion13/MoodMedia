@@ -30,6 +30,7 @@
 		F93C487022F812570090CCFA /* DetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C486F22F812570090CCFA /* DetailsInteractor.swift */; };
 		F93C487222F8132C0090CCFA /* DetailsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C487122F8132B0090CCFA /* DetailsWorker.swift */; };
 		F9799A322302963700301B07 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9799A312302963700301B07 /* Gradient.swift */; };
+		F9EA1E1A231CCF9C00B52795 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EA1E19231CCF9C00B52795 /* MapVC.swift */; };
 		F9F5A44322FAD27700998EE4 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F5A44222FAD27700998EE4 /* UIColor+.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		F93C486F22F812570090CCFA /* DetailsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
 		F93C487122F8132B0090CCFA /* DetailsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsWorker.swift; sourceTree = "<group>"; };
 		F9799A312302963700301B07 /* Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
+		F9EA1E19231CCF9C00B52795 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		F9F5A44222FAD27700998EE4 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 				F93C486D22F810000090CCFA /* DetailVC.swift */,
 				F93C484D22F7E4BF0090CCFA /* current.swift */,
 				F93C484B22F7E4090090CCFA /* WeatherVC.swift */,
+				F9EA1E19231CCF9C00B52795 /* MapVC.swift */,
 				F93C486F22F812570090CCFA /* DetailsInteractor.swift */,
 				F93C483D22F7E2BB0090CCFA /* Main.storyboard */,
 				F93C484022F7E2BD0090CCFA /* Assets.xcassets */,
@@ -277,6 +280,7 @@
 				F93C485222F7E8870090CCFA /* SearchVC.swift in Sources */,
 				F93C486222F7EAB30090CCFA /* Media+.swift in Sources */,
 				F93C486C22F808F90090CCFA /* ApiClient.swift in Sources */,
+				F9EA1E1A231CCF9C00B52795 /* MapVC.swift in Sources */,
 				F93C486E22F810000090CCFA /* DetailVC.swift in Sources */,
 				F93C487022F812570090CCFA /* DetailsInteractor.swift in Sources */,
 				F93C486422F7EAB30090CCFA /* URL+.swift in Sources */,

@@ -13,7 +13,6 @@ import UserNotifications
 
 class WeatherVC: MapVC {
 	
-    var userLocation : String!
 
     var localCity : String!
     @IBOutlet weak var cityLocationLabel: UILabel!
@@ -200,7 +199,7 @@ class WeatherVC: MapVC {
 		
 		if (location.horizontalAccuracy > 0) {
 			//remove space silly
-			self.userLocation = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
+			let userLocation = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
 			//print(userLocation)
 			getCurrentWeatherData(userLocation)
 			setupMapData(location.coordinate)

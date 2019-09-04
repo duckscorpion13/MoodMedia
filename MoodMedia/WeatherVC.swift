@@ -203,8 +203,8 @@ class WeatherVC: MapVC {
 			self.userLocation = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
 			//print(userLocation)
 			getCurrentWeatherData(userLocation)
-			setupData(location.coordinate)
-			locationManager.stopUpdatingLocation()
+			setupMapData(location.coordinate)
+			
 			
 			CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
 				

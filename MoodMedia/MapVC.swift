@@ -12,7 +12,6 @@ import MapKit
 class MapVC: UIViewController, CLLocationManagerDelegate {
 	var locationManager = CLLocationManager()
 	
-	var m_places = [Place]()
 	var m_position: CLLocationCoordinate2D!
 	
 	lazy var m_mapView: MKMapView = {
@@ -217,6 +216,36 @@ extension MapVC: MKMapViewDelegate {
 		return circleRenderer
 	}
 	
+	fileprivate func searchPlace(_ query: String) {
+		let searchRequest = MKLocalSearch.Request()
+		searchRequest.region = self.m_mapView.region
+		searchRequest.naturalLanguageQuery = query
+		let search = MKLocalSearch(request: searchRequest)
+		search.start { response, error in
+			guard let response = response else {
+				print("Error: \(error?.localizedDescription ?? "Unknown error").")
+				return
+			}
+			
+			var places = [Place]()
+			for item in response.mapItems {
+				print(item.phoneNumber ?? "No phone number.")
+				let place = Place(isCurrentLocation: item.isCurrentLocation,
+								  name: item.name,
+								  url: item.url,
+								  phoneNumber: item.phoneNumber,
+								  latitude: item.placemark.coordinate.latitude,
+								  longitude: item.placemark.coordinate.longitude)
+				places.append(place)
+				
+				let annotation = MKPointAnnotation()
+				annotation.coordinate = CLLocationCoordinate2D(latitude: place.latitude, longitude:  place.longitude)
+				annotation.title =  place.name ?? ""
+				self.m_mapView.addAnnotation(annotation)
+			}
+		}
+	}
+	
 	func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 		if let title = view.annotation?.title {
 			if("You" == title) {
@@ -225,35 +254,7 @@ extension MapVC: MKMapViewDelegate {
 						self.m_mapView.removeAnnotation(anno)
 					}
 				}
-				
-				let searchRequest = MKLocalSearch.Request()
-				searchRequest.region = self.m_mapView.region
-				searchRequest.naturalLanguageQuery = "cafe"
-				let search = MKLocalSearch(request: searchRequest)
-				search.start { response, error in
-					guard let response = response else {
-						print("Error: \(error?.localizedDescription ?? "Unknown error").")
-						return
-					}
-					
-					var places = [Place]()
-					for item in response.mapItems {
-						print(item.phoneNumber ?? "No phone number.")
-						let place = Place(isCurrentLocation: item.isCurrentLocation,
-										  name: item.name,
-										  url: item.url,
-										  phoneNumber: item.phoneNumber,
-										  latitude: item.placemark.coordinate.latitude,
-										  longitude: item.placemark.coordinate.longitude)
-						places.append(place)
-						
-						let annotation = MKPointAnnotation()
-						annotation.coordinate = CLLocationCoordinate2D(latitude: place.latitude, longitude:  place.longitude)
-						annotation.title =  place.name ?? ""
-						self.m_mapView.addAnnotation(annotation)
-					}
-					self.m_places = places
-				}
+				searchPlace("store")
 			} else {
 				if let coordinate = view.annotation?.coordinate {
 					self.drawRoute(coordinate)

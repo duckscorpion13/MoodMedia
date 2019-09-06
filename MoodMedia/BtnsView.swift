@@ -32,7 +32,6 @@ class BtnsView: UIView {
 	
 	let m_cafeBtn : UIButton = {
 		let btn = UIButton()
-//		btn.setTitle("A", for: .normal)
 		btn.setBackgroundImage(UIImage(named: "cafe"), for: .normal)
 //		btn.translatesAutoresizingMaskIntoConstraints = false
 		btn.addTarget(self, action: #selector(handleCafe), for: .touchUpInside)
@@ -40,12 +39,13 @@ class BtnsView: UIView {
 	}()
 	
 	@objc fileprivate func handleCafe() {
+		resetAlpha()
+		self.m_cafeBtn.alpha = 1
 		delegate?.btnsViewClickCafe?()
 	}
 	
 	let m_foodBtn : UIButton = {
 		let btn = UIButton()
-//		btn.setTitle("B", for: .normal)
 		btn.setBackgroundImage(UIImage(named: "food"), for: .normal)
 //		btn.translatesAutoresizingMaskIntoConstraints = false
 		btn.addTarget(self, action: #selector(handleFood), for: .touchUpInside)
@@ -53,12 +53,13 @@ class BtnsView: UIView {
 	}()
 	
 	@objc fileprivate func handleFood() {
+		resetAlpha()
+		self.m_foodBtn.alpha = 1
 		delegate?.btnsViewClickFood?()
 	}
 	
 	let m_shopBtn : UIButton = {
 		let btn = UIButton()
-//		btn.setTitle("C", for: .normal)
 		btn.setBackgroundImage(UIImage(named: "shop"), for: .normal)
 //		btn.translatesAutoresizingMaskIntoConstraints = false
 		btn.addTarget(self, action: #selector(handleShop), for: .touchUpInside)
@@ -66,19 +67,22 @@ class BtnsView: UIView {
 	}()
 	
 	@objc fileprivate func handleShop() {
+		resetAlpha()
+		self.m_shopBtn.alpha = 1
 		delegate?.btnsViewClickShop?()
 	}
 	
 	let m_musicBtn : UIButton = {
 		let btn = UIButton()
-		//		btn.setTitle("C", for: .normal)
 		btn.setBackgroundImage(UIImage(named: "music"), for: .normal)
-		//		btn.translatesAutoresizingMaskIntoConstraints = false
+//		btn.translatesAutoresizingMaskIntoConstraints = false
 		btn.addTarget(self, action: #selector(handleMusic), for: .touchUpInside)
 		return btn
 	}()
 	
 	@objc fileprivate func handleMusic() {
+		resetAlpha()
+		self.m_musicBtn.alpha = 1
 		delegate?.btnsViewClickMusic?()
 	}
 	
@@ -97,6 +101,15 @@ class BtnsView: UIView {
 		m_stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
 		m_stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 		
+		resetAlpha()
+	}
+	
+	fileprivate func resetAlpha() {
+		for view in self.m_stackView.subviews {
+			if let btn = view as? UIButton {
+				btn.alpha = 0.5
+			}
+		}
 	}
 	
 	required init?(coder aDecoder: NSCoder) {

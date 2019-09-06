@@ -18,6 +18,8 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
 		return MKMapView()
 	}()
 	
+	let m_btnsView = BtnsView()
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,6 +27,8 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
 		setupMapView()
 		
 		initLocation()
+		
+		setupBtns()
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +51,17 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
 		self.m_mapView.delegate = self
 		self.m_mapView.showsUserLocation = true
 		self.m_mapView.userTrackingMode = .follow
+	}
+	
+	func setupBtns() {
+		self.m_btnsView.delegate = self
+		self.view.addSubview(self.m_btnsView)
+		self.view.bringSubviewToFront(self.m_btnsView)
+		self.m_btnsView.translatesAutoresizingMaskIntoConstraints = false
+		self.m_btnsView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+		self.m_btnsView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
+		self.m_btnsView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
+		self.m_btnsView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1).isActive = true
 	}
 	
 	func initLocation(){
@@ -227,6 +242,12 @@ extension MapVC: MKMapViewDelegate {
 				return
 			}
 			
+			for anno in self.m_mapView.annotations {
+				if(anno.title != "You") {
+					self.m_mapView.removeAnnotation(anno)
+				}
+			}
+			
 			var places = [Place]()
 			for item in response.mapItems {
 				print(item.phoneNumber ?? "No phone number.")
@@ -247,19 +268,22 @@ extension MapVC: MKMapViewDelegate {
 	}
 	
 	func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-		if let title = view.annotation?.title {
-			if("You" == title) {
-				for anno in self.m_mapView.annotations {
-					if(anno.title != "You") {
-						self.m_mapView.removeAnnotation(anno)
-					}
-				}
-				searchPlace("store")
-			} else {
-				if let coordinate = view.annotation?.coordinate {
-					self.drawRoute(coordinate)
-				}
-			}
+		if let coordinate = view.annotation?.coordinate {
+			self.drawRoute(coordinate)
 		}
+	}
+}
+
+extension MapVC: BtnsViewDelegate {
+	func btnsViewClickCafe() {
+		self.searchPlace("cafe")
+	}
+	
+	func btnsViewClickFood() {
+		self.searchPlace("food")
+	}
+	
+	func btnsViewClickShop() {
+		self.searchPlace("shop")
 	}
 }

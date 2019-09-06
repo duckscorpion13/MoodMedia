@@ -33,6 +33,7 @@
 		F9799A322302963700301B07 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9799A312302963700301B07 /* Gradient.swift */; };
 		F9EA1E1A231CCF9C00B52795 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EA1E19231CCF9C00B52795 /* MapVC.swift */; };
 		F9F5A44322FAD27700998EE4 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F5A44222FAD27700998EE4 /* UIColor+.swift */; };
+		F9FD64252321FAA50049C3E1 /* BtnsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FD64242321FAA50049C3E1 /* BtnsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		F9799A312302963700301B07 /* Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		F9EA1E19231CCF9C00B52795 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		F9F5A44222FAD27700998EE4 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		F9FD64242321FAA50049C3E1 /* BtnsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BtnsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				F93C486722F7EE240090CCFA /* SearchWorker.swift */,
 				F93C485C22F7EA6A0090CCFA /* MyTableViewCell.swift */,
 				F93C487122F8132B0090CCFA /* DetailsWorker.swift */,
+				F9FD64242321FAA50049C3E1 /* BtnsView.swift */,
 				F93C486D22F810000090CCFA /* DetailVC.swift */,
 				F93C484D22F7E4BF0090CCFA /* current.swift */,
 				F93C484B22F7E4090090CCFA /* WeatherVC.swift */,
@@ -292,6 +295,7 @@
 				F9F5A44322FAD27700998EE4 /* UIColor+.swift in Sources */,
 				F93C486622F7EDB90090CCFA /* SearchInteractor.swift in Sources */,
 				F93C485D22F7EA6A0090CCFA /* MyTableViewCell.swift in Sources */,
+				F9FD64252321FAA50049C3E1 /* BtnsView.swift in Sources */,
 				F93C485922F7E8F30090CCFA /* SearchNode.swift in Sources */,
 				F93C483A22F7E2BB0090CCFA /* AppDelegate.swift in Sources */,
 				F93C484E22F7E4BF0090CCFA /* current.swift in Sources */,

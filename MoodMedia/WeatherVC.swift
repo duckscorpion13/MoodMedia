@@ -45,34 +45,34 @@ class WeatherVC: MapVC {
 	
 	
 	
-	fileprivate func setupTestBtn() {
-		let btn = UIButton(frame: .zero)
-		btn.setTitle("Promote Music", for: .normal)
-		btn.addTarget(self, action: #selector(self.clickTest1(_:)), for: .touchDown)
-	
-		self.view.addSubview(btn)
-		self.view.bringSubviewToFront(btn)
-		
-		btn.backgroundColor = .orange
-		
-		btn.clipsToBounds = true
-		btn.layer.cornerRadius = 25
-		
-		btn.translatesAutoresizingMaskIntoConstraints = false
-		if #available(iOS 11.0, *) {
-			btn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
-		} else {
-			btn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
-		}
-		btn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-		btn.widthAnchor.constraint(equalToConstant: 150).isActive = true
-		btn.heightAnchor.constraint(equalToConstant: 50).isActive = true
-	}
-	
-	@objc func clickTest1(_ sender: UIButton) {
-		self.navigationController?.pushViewController(SearchVC(self.m_searchStr), animated: true)
-		sender.tag += 1
-	}
+//	fileprivate func setupTestBtn() {
+//		let btn = UIButton(frame: .zero)
+//		btn.setTitle("Promote Music", for: .normal)
+//		btn.addTarget(self, action: #selector(self.clickTest1(_:)), for: .touchDown)
+//
+//		self.view.addSubview(btn)
+//		self.view.bringSubviewToFront(btn)
+//
+//		btn.backgroundColor = .orange
+//
+//		btn.clipsToBounds = true
+//		btn.layer.cornerRadius = 25
+//
+//		btn.translatesAutoresizingMaskIntoConstraints = false
+//		if #available(iOS 11.0, *) {
+//			btn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
+//		} else {
+//			btn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
+//		}
+//		btn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//		btn.widthAnchor.constraint(equalToConstant: 150).isActive = true
+//		btn.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//	}
+//
+//	@objc func clickTest1(_ sender: UIButton) {
+//		self.navigationController?.pushViewController(SearchVC(self.m_searchStr), animated: true)
+//		sender.tag += 1
+//	}
 	
 	
 	
@@ -80,7 +80,7 @@ class WeatherVC: MapVC {
 		
 		super.viewDidLoad()
 		
-		setupTestBtn()
+//		setupTestBtn()
 		
 		let singleFinger = UITapGestureRecognizer(target: self, action: #selector(self.singleTap(_:)))
 		singleFinger.numberOfTapsRequired = 1
@@ -489,3 +489,8 @@ extension WeatherVC {
 }
 
 
+extension WeatherVC {
+	func btnsViewClickMusic() {
+		self.navigationController?.pushViewController(SearchVC(self.m_searchStr), animated: true)
+	}
+}

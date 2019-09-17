@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class SearchVC: UIViewController, SearchPresentationLogic {
+class SearchVC: EmitterVC, SearchPresentationLogic {
 	let contentCellIdentifier = "SearchTableViewCell"
 	
 	var interactor = SearchInteractor()
@@ -36,9 +36,10 @@ class SearchVC: UIViewController, SearchPresentationLogic {
 	}
 	
 	// MARK: Setup
-	convenience init(_ search: String) {
+	convenience init(_ search: String, summary: String) {
 		self.init()
 		self.m_searchStr = search
+		self.currentSummary = summary
 	}
 
 	
@@ -49,6 +50,7 @@ class SearchVC: UIViewController, SearchPresentationLogic {
 		super.viewDidLoad()
 		m_tableView.dataSource = self
 		m_tableView.delegate = self
+		m_tableView.backgroundColor = .clear
 		m_tableView.register(MyTableViewCell.self, forCellReuseIdentifier: contentCellIdentifier)
 		view.addSubview(m_tableView)
 		m_tableView.full(of: view)
@@ -163,7 +165,7 @@ extension SearchVC: UITableViewDataSource {
 			if let artworkUrl = media.urlForArtwork {
 				cell.imgView.sd_setImage(with: artworkUrl)
 			}
-			
+			cell.backgroundColor = .clear
 			cell.nameLabel.text = media.trackName
 			cell.detailLabel.text = media.artistName
 		}

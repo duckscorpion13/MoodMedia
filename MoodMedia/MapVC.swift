@@ -55,6 +55,8 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
 	
 	func setupBtns() {
 		self.m_btnsView.delegate = self
+		self.m_btnsView.backgroundColor = .lightGray
+		self.m_btnsView.layer.cornerRadius = 15
 		self.view.addSubview(self.m_btnsView)
 		self.view.bringSubviewToFront(self.m_btnsView)
 		self.m_btnsView.translatesAutoresizingMaskIntoConstraints = false
